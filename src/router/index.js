@@ -1,12 +1,42 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import Debe from "../views/Debe.vue";
+import Baslik from "../views/Baslik.vue";
+import Basliklar from "../views/Basliklar.vue";
+import EntryPage from "../views/EntryPage.vue";
+// import Main from "../views/Main.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: "/",
+    name: "Main"
+  },
+  {
+    path: "/debe",
+    name: "Debe",
+    component: Debe
+  },
+  {
+    path: "/basliklar/:kanal",
+    name: "Basliklar",
+    component: Basliklar
+  },
+  {
+    path: "/baslik/:slug",
+    name: "Baslik",
+    component: Baslik
+  },
+  {
+    path: "/entry/:id",
+    name: "Entry",
+    component: EntryPage
+  },
+  // { path: "?q=", redirect: "/b" },
+  {
+    path: "/Home",
     name: "Home",
     component: Home
   },
@@ -22,7 +52,11 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  routes
+  mode: "history",
+  routes,
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  }
 });
 
 export default router;
