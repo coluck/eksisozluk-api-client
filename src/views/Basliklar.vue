@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="column is-6">
     <aside class="menu" v-if="!loading">
       <p class="menu-label">
         {{ kanal }}

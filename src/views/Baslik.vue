@@ -1,42 +1,66 @@
 <template>
-  <div class="column is-9">
-    <div v-if="!loading && !error">
-      <div class="box">
-        <p class="is-size-5 has-text-weight-bold">
-          {{ title }}
-        </p>
-      </div>
-      <div class="level is-mobile">
-        <div class="level-left">
-          <sort-mode></sort-mode>
+  <div class="columns">
+    <div class="column is-9">
+      <div v-if="!loading && !error">
+        <div class="box">
+          <p class="is-size-5 has-text-weight-bold">
+            {{ title }}
+          </p>
         </div>
-        <div class="level-right">
-          <div v-if="total_page > 1">
-            <pager
-              :total_page="total_page"
-              :current_page="current_page"
-              :t_slug="slug"
-            >
-            </pager>
+        <div class="level is-mobile">
+          <div class="level-left">
+            <sort-mode></sort-mode>
+          </div>
+          <div class="level-right">
+            <div v-if="total_page > 1">
+              <pager
+                :total_page="total_page"
+                :current_page="current_page"
+                :t_slug="slug"
+              >
+              </pager>
+            </div>
+          </div>
+        </div>
+        <div v-if="entries">
+          <entry
+            v-for="entry in entries"
+            :entry="entry"
+            :key="entry.id"
+          ></entry>
+        </div>
+        <div class="level is-mobile">
+          <div class="level-left">
+            <sort-mode></sort-mode>
+          </div>
+          <div class="level-right">
+            <div v-if="total_page > 1">
+              <pager
+                :total_page="total_page"
+                :current_page="current_page"
+                :t_slug="slug"
+              >
+              </pager>
+            </div>
           </div>
         </div>
       </div>
-      <div v-if="tags" class="tags">
-        <div v-for="tag in tags" :key="tag" class="tag">
-          {{ tag }}
+      <div v-else-if="loading" class="box">
+        yükleniyor ...
+      </div>
+      <div v-else>
+        <p class="box is-size-5">olmaz olsun böyle başlık -- {{ routeSlug }}</p>
+      </div>
+    </div>
+    <div class="column is-3">
+      <div v-if="tags">
+        <p class="is-size-5 has-text-weight-bold">kanallar</p>
+        <br />
+
+        <div v-for="tag in tags" :key="tag" class="tags">
+          <tag :tag="tag"></tag>
         </div>
       </div>
-      <div v-if="entries">
-        <entry v-for="entry in entries" :entry="entry" :key="entry.id"></entry>
-      </div>
-    </div>
-    <div v-else-if="loading" class="box">
-      yükleniyor ...
-    </div>
-    <div v-else>
-      <p class="box is-size-5">
-        olmaz olsun böyle başlık
-      </p>
     </div>
   </div>
 </template>
@@ -47,6 +71,7 @@ import axios from "axios";
 import Pager from "@/components/Pager.vue";
 import Entry from "@/components/Entry.vue";
 import SortMode from "@/components/SortMode.vue";
+import Tag from "@/components/Tag.vue";
 
 export default {
   data() {
@@ -108,7 +133,8 @@ export default {
   components: {
     Entry,
     Pager,
-    SortMode
+    SortMode,
+    Tag
   }
 };
 </script>
