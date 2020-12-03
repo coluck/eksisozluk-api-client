@@ -6,13 +6,20 @@
           {{ title }}
         </p>
       </div>
-      <div v-if="total_page > 1">
-        <pager
-          :total_page="total_page"
-          :current_page="current_page"
-          :t_slug="slug"
-        >
-        </pager>
+      <div class="level is-mobile">
+        <div class="level-left">
+          <sort-mode></sort-mode>
+        </div>
+        <div class="level-right">
+          <div v-if="total_page > 1">
+            <pager
+              :total_page="total_page"
+              :current_page="current_page"
+              :t_slug="slug"
+            >
+            </pager>
+          </div>
+        </div>
       </div>
       <div v-if="tags" class="tags">
         <div v-for="tag in tags" :key="tag" class="tag">
@@ -39,6 +46,7 @@ import axios from "axios";
 
 import Pager from "@/components/Pager.vue";
 import Entry from "@/components/Entry.vue";
+import SortMode from "@/components/SortMode.vue";
 
 export default {
   data() {
@@ -59,9 +67,9 @@ export default {
       // let top = to.params.slug;
       // this.getThread
       // this.getThread(to.params.slug);
-      console.log(this.$route.params.slug);
+      // console.log(this.$route.params.slug);
       this.getThread(this.$route.params.slug);
-      console.log("this.$route.params.slug: " + this.$route.params.slug);
+      // console.log("this.$route.params.slug: " + this.$route.params.slug);
 
       this.loading = true;
       this.error = false;
@@ -69,8 +77,8 @@ export default {
   },
   created() {
     // this.getThread(this.routeSlug);
-    console.log("this.$route.params.slug: " + this.$route.params.slug);
-    console.log("this.$route.query.p: " + this.$route.query.p);
+    // console.log("this.$route.params.slug: " + this.$route.params.slug);
+    // console.log("this.$route.query.p: " + this.$route.query.p);
     this.getThread(this.$route.params.slug);
     // console.log("created");
   },
@@ -99,9 +107,10 @@ export default {
   },
   components: {
     Entry,
-    Pager
+    Pager,
+    SortMode
   }
 };
 </script>
 
-<style></style>
+<style scoped></style>

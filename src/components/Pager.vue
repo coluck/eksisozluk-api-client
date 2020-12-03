@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import updateQS from "../utils/qs.js";
+
 export default {
   name: "Pager",
   props: {
@@ -52,21 +54,11 @@ export default {
       let val = value;
       let slug = this.$route.params.slug;
       if (!slug.includes("--")) slug = this.t_slug;
-      let ss = this.updateQS(slug, "p", val);
-      console.log(ss);
+      let ss = updateQS(slug, "p", val);
       this.$router.push({
         name: "Baslik",
         params: { slug: ss }
       });
-    },
-    updateQS(uri, key, value) {
-      var re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
-      var separator = uri.indexOf("?") !== -1 ? "&" : "?";
-      if (uri.match(re)) {
-        return uri.replace(re, "$1" + key + "=" + value + "$2");
-      } else {
-        return uri + separator + key + "=" + value;
-      }
     }
   },
   computed: {
