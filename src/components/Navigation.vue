@@ -49,7 +49,7 @@
 
             <div class="navbar-dropdown">
               <router-link class="navbar-item" to="/basliklar/seyehat"
-                >#seyehat</router-link
+                >#seyahat</router-link
               >
               <router-link class="navbar-item" to="/basliklar/tv"
                 >#tv</router-link
