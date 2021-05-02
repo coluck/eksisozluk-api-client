@@ -48,8 +48,8 @@
             </a>
 
             <div class="navbar-dropdown">
-              <router-link class="navbar-item" to="/basliklar/seyehat"
-                >#seyehat</router-link
+              <router-link class="navbar-item" to="/basliklar/seyahat"
+                >#seyahat</router-link
               >
               <router-link class="navbar-item" to="/basliklar/tv"
                 >#tv</router-link
